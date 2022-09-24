@@ -18,10 +18,6 @@ class Parser {
         return this.raw[this.index]
     }
 
-    readUntil(string) {
-
-    }
-
     //方便format 去掉空白
     skip() {
         while(this.current() <= ' '){
