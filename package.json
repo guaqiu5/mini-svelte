@@ -1,0 +1,22 @@
+{
+  "name": "mini-svelte",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guaqiu5/mini-svelte.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guaqiu5/mini-svelte/issues"
+  },
+  "homepage": "https://github.com/guaqiu5/mini-svelte#readme",
+  "devDependencies": {
+    "jest": "^29.0.3"
+  }
+}
