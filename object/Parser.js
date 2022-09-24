@@ -38,6 +38,20 @@ class Parser {
         }
         return str;
     }
+
+    readUntilPattern(pattern) {
+        let str = "";
+        let ch = "";
+    
+        while (((ch = this.current()), !pattern.test(ch))) {
+          if (this.index >= this.raw.length) {
+            return str;
+          }
+          str += ch;
+          this.index++;
+        }
+        return str;
+    }
 }
 
 module.exports = Parser

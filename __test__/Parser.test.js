@@ -32,4 +32,10 @@ describe('Parse.js', () => {
         expect(parser.readUntil(">")).toBe("div");
      });
     
+     it("readUntilPatter()功能:消费到正则匹配的ch",() =>{
+        const parser = new Parser(`<div class="wrapper">`)
+        parser.next('<')
+        expect(parser.readUntilPattern(/ |\>/)).toBe("div");
+        expect(parser.current()).toBe(" ");
+     })
 })
