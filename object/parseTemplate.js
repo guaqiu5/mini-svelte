@@ -2,7 +2,7 @@ const Parser = require('./Parser')
 const Node = require('./Node')
 
 let stack = []
-const parser = new Parser(`<div />`);
+const parser = new Parser(`<div class="wrapper"/>`);
 const root = new Node();
 root.start = parser.index;
 root.type = "Fragment";
@@ -14,11 +14,14 @@ function reachTagName() {
     const tagName = parser.readUntilPattern(/ |\>/)
     node.name = tagName
     node.type = 'Element'
+    reachAttrs(node)
    if(parser.next('>')){
+        console.log(1)
         stack.push(node)
         return node
-    }else if(parser.next(" />")){
+    }else if(parser.next("/>")){
         // <video /> 自闭和标签
+        console.log('这里')
         node.selfClosing = true
         node.end = parser.index
     }
@@ -35,6 +38,48 @@ function endTagName(){
     }
 }
 
+function reachAttrs(node) {
+    // key=value
+    parser.skip();
+    let ch = "";
+    let key = "";
+
+    if (parser.current() === "/" || parser.current() === ">") {
+      return;
+    }
+
+    while (((ch = parser.current()), ch !== ">" && ch !== "=" && ch !== ":")) {
+      // TODO: for now, only support `=`
+      key += ch;
+      parser.index += 1;
+    }
+
+    node.attrs.push({
+      name: key,
+      ...attr_value(),
+    });
+
+    parser.skip();
+
+    if (parser.current() !== ">" && parser.current() !== "/") {
+      attrs(node);
+    }
+  }
+
+function attr_value() {
+    // TODO: handle `:`, {expression}
+    // <div data-modal={} />
+    if (parser.next("=")) {
+      if (parser.next('"')) {
+        const value = parser.readUntil('"');
+        parser.next('"');
+        return {
+          value,
+          type: "Attribute",
+        };
+      }
+    }
+  }
 
 function parseTemplate() {
     let ch = parser.current();
@@ -61,5 +106,5 @@ function parseTemplate() {
 }
 
 parseTemplate()
-console.log(root)
+console.log(root.children[0].attrs)
 module.exports = parseTemplate
