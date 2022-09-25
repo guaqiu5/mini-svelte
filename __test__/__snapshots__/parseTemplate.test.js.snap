@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parseTemplate 得到text 1`] = `
+Node {
+  "attrs": [],
+  "children": [
+    Node {
+      "attrs": [],
+      "children": [
+        Node {
+          "attrs": [],
+          "children": [],
+          "data": "Hello Svelte",
+          "end": 17,
+          "name": "",
+          "selfClosing": false,
+          "start": 5,
+          "type": "Text",
+        },
+      ],
+      "data": "",
+      "end": 22,
+      "name": "div",
+      "selfClosing": false,
+      "start": 0,
+      "type": "Element",
+    },
+  ],
+  "data": "",
+  "end": 23,
+  "name": "",
+  "selfClosing": false,
+  "start": 0,
+  "type": "Fragment",
+}
+`;
+
+exports[`parseTemplate 解析html模板 1`] = `
+Node {
+  "attrs": [],
+  "children": [
+    Node {
+      "attrs": [
+        {
+          "name": "class",
+          "type": "Attribute",
+          "value": "wrapper",
+        },
+      ],
+      "children": [],
+      "data": "",
+      "end": 22,
+      "name": "div",
+      "selfClosing": true,
+      "start": 0,
+      "type": "Element",
+    },
+  ],
+  "data": "",
+  "end": 22,
+  "name": "",
+  "selfClosing": false,
+  "start": 0,
+  "type": "Fragment",
+}
+`;
