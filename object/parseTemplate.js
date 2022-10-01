@@ -102,13 +102,16 @@ function parse(content){
             } else {
             currentNode = stack[stack.length-1]
          }
+         // tag end
         if(parser.next('</')){
             endTagName()
             parseTemplate()
             } else if(parser.next('<')){
+              // tag start
             console.log('push tag')
            currentNode.children.push(reachTagName())
          }else {
+          // text
             currentNode.children.push(reachText())
         }
     
