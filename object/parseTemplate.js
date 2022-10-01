@@ -91,6 +91,7 @@ function parse(content){
       }
       node.type = `${thisBlockName} Block`
       if(node.type === 'if Block'){
+        parser.skip()
         // {#if condition}
         const condition = parser.readUntil('}')
         node.data = {
@@ -98,12 +99,68 @@ function parse(content){
         }
       }else if(node.type === 'each Block'){
         // {#each expression as name, index}...{/each}
+        parser.skip()
         const variableExpression = parser.readUntil(' ')
+        parser.skip()
+        // expect reach as
+        if(parser.next('as')){
+          parser.skip()
+          const localScopeVariable = parser.readUntilPattern(/\,|\}/);
+          // , (index)
+          if(parser.next(',')){
+            parser.skip()
+            const index = parser.readUntil('}')
+            node.data = {
+              variableExpression,
+              localScopeVariable,
+              index
+            }
+          }else{
+            node.data = {
+              variableExpression,
+              localScopeVariable
+            }
+          }
+
+        }else{
+          throw new Error('each Block needs as')
+        }
+
       }
-      if(parser.next('}')) return node
+      if(parser.next('}')) {
+        stack.push(node)
+        return node
+      }
       else throw new Error('block is missing }')
     }
 
+    function endBlock() {
+      const currentNode = stack.pop()
+      // block的name要对应 if Block   {/if}
+      const thisName = parser.readUntil('}')
+      const thisBlockName = `${thisName} Block`
+      console.log(thisBlockName)
+      if(thisBlockName === currentNode.type){
+        parser.next("}");
+        currentNode.end = parser.index
+      }else{
+           throw new Error('block name should match')
+      }
+
+    }
+
+    function parseMustache() {
+      let node = new Node()
+      node.type = 'mustache'
+      node.start = parser.index
+      const variable = parser.readUntil('}')
+      parser.data = {
+        variable
+      } 
+      parser.next('}')
+      node.end = parser.index
+      return node
+    }
 
     function reachText() {
     // '>'
@@ -135,15 +192,22 @@ function parse(content){
             console.log('push tag')
            currentNode.children.push(reachTagName())
          } else if(parser.next('{#')){
-            // block scope
+            // block scope start
             currentNode.children.push(reachBlock())
-         }else {
+         } else if(parser.next('{/')){
+            // block scope end
+            endBlock()
+            parseTemplate()
+         } else if(parser.next('{')){
+          currentNode.children.push(parseMustache())
+       }
+         else {
           // text
             currentNode.children.push(reachText())
         }
     
         }
-     parser.skip()
+    parser.skip()
     root.end = parser.index
     return root
     }

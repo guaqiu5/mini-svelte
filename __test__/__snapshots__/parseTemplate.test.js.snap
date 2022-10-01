@@ -1,5 +1,88 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`parseTemplate eachBlock结点(有index) 1`] = `
+Node {
+  "attrs": [],
+  "children": [
+    Node {
+      "attrs": [],
+      "children": [],
+      "data": {
+        "index": "index",
+        "localScopeVariable": "item",
+        "variableExpression": "guaqius",
+      },
+      "end": 0,
+      "name": "",
+      "selfClosing": false,
+      "start": 2,
+      "type": "each Block",
+    },
+  ],
+  "data": "",
+  "end": 29,
+  "name": "",
+  "selfClosing": false,
+  "start": 0,
+  "type": "Fragment",
+}
+`;
+
+exports[`parseTemplate eachBlock结点(没有index) 1`] = `
+Node {
+  "attrs": [],
+  "children": [
+    Node {
+      "attrs": [],
+      "children": [],
+      "data": {
+        "localScopeVariable": "item",
+        "variableExpression": "guaqius",
+      },
+      "end": 0,
+      "name": "",
+      "selfClosing": false,
+      "start": 2,
+      "type": "each Block",
+    },
+  ],
+  "data": "",
+  "end": 23,
+  "name": "",
+  "selfClosing": false,
+  "start": 0,
+  "type": "Fragment",
+}
+`;
+
+exports[`parseTemplate end block 1`] = `
+Node {
+  "attrs": [],
+  "children": [
+    Node {
+      "attrs": [],
+      "children": [],
+      "data": {
+        "index": "i",
+        "localScopeVariable": "item",
+        "variableExpression": "guaqius",
+      },
+      "end": 32,
+      "name": "",
+      "selfClosing": false,
+      "start": 2,
+      "type": "each Block",
+    },
+  ],
+  "data": "",
+  "end": 32,
+  "name": "",
+  "selfClosing": false,
+  "start": 0,
+  "type": "Fragment",
+}
+`;
+
 exports[`parseTemplate ifblock结点 1`] = `
 Node {
   "attrs": [],
