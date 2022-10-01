@@ -40,4 +40,8 @@ describe('parseTemplate', () => {
     it('end block', () => {
         expect(parseTemplate(`{#each guaqius as item,i}{/each}`)).toMatchSnapshot()
     })
+
+    it('mustache', () => {
+        expect(parseTemplate(`<div class="wrapper">{guaqiu}</div>`)).toMatchSnapshot()
+    })
 })

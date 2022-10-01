@@ -62,7 +62,7 @@ function parse(content){
     parser.skip();
 
     if (parser.current() !== ">" && parser.current() !== "/") {
-      attrs(node);
+      reachAttrs(node);
         }
     }
 
@@ -154,7 +154,7 @@ function parse(content){
       node.type = 'mustache'
       node.start = parser.index
       const variable = parser.readUntil('}')
-      parser.data = {
+      node.data = {
         variable
       } 
       parser.next('}')

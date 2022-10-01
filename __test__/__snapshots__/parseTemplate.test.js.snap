@@ -109,6 +109,49 @@ Node {
 }
 `;
 
+exports[`parseTemplate mustache 1`] = `
+Node {
+  "attrs": [],
+  "children": [
+    Node {
+      "attrs": [
+        {
+          "name": "class",
+          "type": "Attribute",
+          "value": "wrapper",
+        },
+      ],
+      "children": [
+        Node {
+          "attrs": [],
+          "children": [],
+          "data": {
+            "variable": "guaqiu",
+          },
+          "end": 29,
+          "name": "",
+          "selfClosing": false,
+          "start": 22,
+          "type": "mustache",
+        },
+      ],
+      "data": "",
+      "end": 34,
+      "name": "div",
+      "selfClosing": false,
+      "start": 0,
+      "type": "Element",
+    },
+  ],
+  "data": "",
+  "end": 35,
+  "name": "",
+  "selfClosing": false,
+  "start": 0,
+  "type": "Fragment",
+}
+`;
+
 exports[`parseTemplate 得到text 1`] = `
 Node {
   "attrs": [],
