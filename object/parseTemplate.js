@@ -81,6 +81,30 @@ function parse(content){
      }
     }
 
+    function reachBlock() {
+      const validBlockNames = ['if','each','await']
+      let node = new Node()
+      node.start = parser.index
+      const thisBlockName = parser.readUntil(' ')
+      if(!validBlockNames.includes(thisBlockName)) {
+        throw new Error(`${thisBlockName} is not support yet`)
+      }
+      node.type = `${thisBlockName} Block`
+      if(node.type === 'if Block'){
+        // {#if condition}
+        const condition = parser.readUntil('}')
+        node.data = {
+          ifCondition: condition.trim()
+        }
+      }else if(node.type === 'each Block'){
+        // {#each expression as name, index}...{/each}
+        const variableExpression = parser.readUntil(' ')
+      }
+      if(parser.next('}')) return node
+      else throw new Error('block is missing }')
+    }
+
+
     function reachText() {
     // '>'
     const node = new Node()
@@ -110,6 +134,9 @@ function parse(content){
               // tag start
             console.log('push tag')
            currentNode.children.push(reachTagName())
+         } else if(parser.next('{#')){
+            // block scope
+            currentNode.children.push(reachBlock())
          }else {
           // text
             currentNode.children.push(reachText())

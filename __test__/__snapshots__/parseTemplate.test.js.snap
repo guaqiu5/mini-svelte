@@ -1,5 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`parseTemplate ifblock结点 1`] = `
+Node {
+  "attrs": [],
+  "children": [
+    Node {
+      "attrs": [],
+      "children": [],
+      "data": {
+        "ifCondition": "guaqiu",
+      },
+      "end": 0,
+      "name": "",
+      "selfClosing": false,
+      "start": 2,
+      "type": "if Block",
+    },
+  ],
+  "data": "",
+  "end": 12,
+  "name": "",
+  "selfClosing": false,
+  "start": 0,
+  "type": "Fragment",
+}
+`;
+
 exports[`parseTemplate 得到text 1`] = `
 Node {
   "attrs": [],
