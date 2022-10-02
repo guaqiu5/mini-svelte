@@ -16,12 +16,10 @@ function parse(content){
     node.type = 'Element'
     reachAttrs(node)
    if(parser.next('>')){
-        console.log(1)
         stack.push(node)
         return node
     }else if(parser.next("/>")){
         // <video /> 自闭和标签
-        console.log('这里')
         node.selfClosing = true
         node.end = parser.index
     }
@@ -139,7 +137,6 @@ function parse(content){
       // block的name要对应 if Block   {/if}
       const thisName = parser.readUntil('}')
       const thisBlockName = `${thisName} Block`
-      console.log(thisBlockName)
       if(thisBlockName === currentNode.type){
         parser.next("}");
         currentNode.end = parser.index
@@ -189,7 +186,6 @@ function parse(content){
             parseTemplate()
             } else if(parser.next('<')){
               // tag start
-            console.log('push tag')
            currentNode.children.push(reachTagName())
          } else if(parser.next('{#')){
             // block scope start
