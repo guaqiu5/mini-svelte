@@ -1,5 +1,5 @@
-const Parser = require('./Parser')
-const Node = require('./Node')
+const Parser = require('../object/Parser')
+const Node = require('../object/Node')
 function parse(content){
     let stack = []
     const parser = new Parser(content);

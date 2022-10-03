@@ -1,5 +1,5 @@
 const walk = require("./walk");
-const parse = require("../object/parseTemplate");
+const parse = require("../parse/parseTemplate");
 
 function generate(content) {
   const ast = parse(content);

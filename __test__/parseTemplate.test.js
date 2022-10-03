@@ -1,4 +1,4 @@
-const parseTemplate = require('../object/parseTemplate')
+const parseTemplate = require('../parse/parseTemplate')
 
 describe('parseTemplate', () => {
     it('解析html模板', () => {

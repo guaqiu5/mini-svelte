@@ -1,4 +1,4 @@
-const parse = require('../../object/parseTemplate')
+const parse = require('../../parse/parseTemplate')
 const walk = require('../walk')
 describe('walk', () => {
 
